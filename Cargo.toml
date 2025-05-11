@@ -1,0 +1,11 @@
+[package]
+name = "rquant"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rand = "0.9.1"
+num-complex = "0.4"
+
+[package.metadata.docs.rs]
+rustdoc-args = [ "--html-in-header", "./src/docs-header.html" ]
