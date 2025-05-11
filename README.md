@@ -7,9 +7,9 @@ The list of currently supported gates is as follows:
 
 |Gate|Transform|Outcome|
 |-|:-:|:-:|
-|**NOT**|$\begin{pmatrix} 0 & 1 \\\ 1 & 0 \end{pmatrix}$|$\begin{pmatrix} 0 & 1 \\\ 1 & 0 \end{pmatrix}\begin{pmatrix} \alpha \\\ \beta \end{pmatrix} = \begin{pmatrix} \beta \\\ \alpha \end{pmatrix}$|
-|**FLIP**|$\begin{pmatrix} 0 & -i \\\ i & 0 \end{pmatrix}$| $\begin{pmatrix} 0 & -i \\\ i & 0 \end{pmatrix} \begin{pmatrix} \alpha \\\ \beta \end{pmatrix} = \begin{pmatrix} -i \beta \\\ i \alpha \end{pmatrix}$|
-|**PHASE**|$\begin{pmatrix} 1 & 0 \\\ 0 & -1 \end{pmatrix}$| $\begin{pmatrix} 1 & 0 \\\ 0 & -1 \end{pmatrix} \begin{pmatrix} \alpha \\\ \beta \end{pmatrix} = \begin{pmatrix} \alpha \\\ -\beta \end{pmatrix}$|
+|**NOT**|$`\begin{pmatrix} 0 & 1 \\\ 1 & 0 \end{pmatrix}`$|$`\begin{pmatrix} 0 & 1 \\\ 1 & 0 \end{pmatrix}\begin{pmatrix} \alpha \\\ \beta \end{pmatrix} = \begin{pmatrix} \beta \\\ \alpha \end{pmatrix}`$|
+|**FLIP**|$`\begin{pmatrix} 0 & -i \\\ i & 0 \end{pmatrix}`$|$`\begin{pmatrix} 0 & -i \\\ i & 0 \end{pmatrix} \begin{pmatrix} \alpha \\\ \beta \end{pmatrix} = \begin{pmatrix} -i \beta \\\ i \alpha \end{pmatrix}`$|
+|**PHASE**|$`\begin{pmatrix} 1 & 0 \\\ 0 & -1 \end{pmatrix}`$|$`\begin{pmatrix} 1 & 0 \\\ 0 & -1 \end{pmatrix} \begin{pmatrix} \alpha \\\ \beta \end{pmatrix} = \begin{pmatrix} \alpha \\\ -\beta \end{pmatrix}`$|
 
 ## Getting Started
 1. Download the repo
