@@ -1,11 +1,10 @@
 //! # rquant
-//! [`rquant`](crate) is a quantum computing library written entirely in rust.
+//! [`rquant`](crate) is a quantum computing library for qubit manipulation and observation.
 //!
 //! It allows for qubit measurement and basic quantum logic in complex vector space.
 
-/// [`quantum`] is a collection of [`types`](crate::quantum::types),
-/// [`constants`](crate::quantum::constants), and [`behaviors`](crate::quantum::behaviors)
-/// for quantum computing.
+/// [`quantum`] is a collection of [`types`](crate::quantum::types), [`constants`](crate::quantum::constants),
+/// and [`behaviors`](crate::quantum::behaviors) for quantum measurements and observations.
 pub mod quantum {
     /// [`types`] is a collection of `struct` and `enum` that is used to hold data for
     /// [`behaviors`].

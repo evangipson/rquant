@@ -1,11 +1,21 @@
 [package]
 name = "rquant"
-version = "0.1.0"
+version = "0.0.1"
 edition = "2021"
+authors = ["Evan Gipson <evangipson@gmail.com>"]
+exclude = [".gitignore"]
+description = "A quantum computing library for qubit manipulation and observation."
+homepage = "https://docs.rs/crate/rquant"
+documentation = "https://docs.rs/rquant"
+readme = "README.md"
+license = "AGPL-3.0-or-later"
+repository = "https://github.com/evangipson/rquant"
+keywords = ["quantum", "quantum-computing", "qubit", "math", "logger"]
+categories = ["command-line-interface", "data-structures", "emulators", "mathematics", "simulation"]
 
 [dependencies]
 rand = "0.9.1"
 num-complex = "0.4"
 
 [package.metadata.docs.rs]
-rustdoc-args = [ "--html-in-header", "./src/docs-header.html" ]
+rustdoc-args = [ "--html-in-header", "./assets/docs-header.html" ]

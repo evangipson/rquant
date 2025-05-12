@@ -87,6 +87,17 @@ impl QuantumGate {
 
     /// [`QuantumGate::new`] will create a [`QuantumGate`] to transform a [`Qubit`](crate::quantum::types::qubit::Qubit)
     /// in complex vector space based on the provided [`QuantumOperator`].
+    ///
+    /// # Example
+    /// [`QuantumGate::new`] can be used to create a new [`QuantumGate`] based off of the
+    /// [`QuantumOperator::ROTATE`] operation:
+    /// ```rust
+    /// use rquant::quantum::types::{quantum_gate::QuantumGate, quantum_operators::QuantumOperator};
+    ///
+    /// fn create_rotated_quantum_gate() -> QuantumGate {
+    ///     QuantumGate::new(QuantumOperator::ROTATE)
+    /// }
+    /// ```
     pub const fn new(operator: QuantumOperator) -> Self {
         let transform = match operator {
             QuantumOperator::NOT => [QuantumPosition::ONE, QuantumPosition::ZERO],
@@ -113,6 +124,21 @@ impl QuantumGate {
 
 /// Implement the [`fmt::Display`] trait for [`QuantumGate`].
 impl fmt::Display for QuantumGate {
+    /// Will return a [`String`] representation of a [`QuantumGate`].
+    ///
+    /// Produces matrix notation of the [`QuantumGate`]. For instance, [`QuantumGate::NOT`]
+    /// will be presented as:
+    /// $$\begin{pmatrix} 0 & 1 \\\ 1 & 0 \end{pmatrix}$$
+    ///
+    /// # Example
+    /// Can be used to print a [`QuantumGate`] to the console:
+    /// ```rust
+    /// use rquant::quantum::types::quantum_gate::QuantumGate;
+    ///
+    /// fn print_quantum_gate(quantum_gate: QuantumGate) {
+    ///     println!("{quantum_gate}");
+    /// }
+    /// ```
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(
             f,

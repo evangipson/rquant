@@ -28,6 +28,19 @@ impl QuantumPosition {
 
     /// [`new`](QuantumPosition::new) will create a new [`QuantumPosition`] in complex vector space, given two [`Complex<f64>`]
     /// numbers.
+    ///
+    /// # Example
+    /// [`new`](QuantumPosition::new) can be used to create a new [`QuantumPosition`]:
+    /// ```rust
+    /// use num_complex::Complex;
+    /// use rquant::quantum::types::quantum_position::QuantumPosition;
+    ///
+    /// fn create_quantum_position() -> QuantumPosition {
+    ///     let initial_amplitude = Complex::new(1.0, 0.0);
+    ///     let possible_amplitude = Complex::new(1.0, 1.0);
+    ///     QuantumPosition::new(initial_amplitude, possible_amplitude)
+    /// }
+    /// ```
     pub const fn new(initial_position: Complex<f64>, possible_position: Complex<f64>) -> Self {
         QuantumPosition {
             initial_position,
@@ -40,6 +53,16 @@ impl QuantumPosition {
     ///
     /// The algorithm can be illustrated in the following statement:
     /// $$ |\alpha|^2 + |\beta|^2 = 1 $$
+    ///
+    /// # Example
+    /// [`QuantumPosition::has_valid_amplitude`] can be used to ensure a [`QuantumPosition`] has valid amplitudes:
+    /// ```rust
+    /// use rquant::quantum::types::quantum_position::QuantumPosition;
+    ///
+    /// fn validate_quantum_position(quantum_position: QuantumPosition) -> bool {
+    ///     quantum_position.has_valid_amplitude()
+    /// }
+    /// ```
     pub fn has_valid_amplitude(&self) -> bool {
         self.initial_position.norm_sqr() + self.possible_position.norm_sqr() == 1.0
     }
