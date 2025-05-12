@@ -12,12 +12,9 @@ impl Qubit {
     /// [`Qubit::new`] will create a new [`Qubit`] with a [`QuantumPosition`]
     /// in complex vector space.
     pub fn new(position: QuantumPosition) -> Self {
-        assert!(
-            (position.initial_position.norm_sqr() + position.possible_position.norm_sqr() - 1.0)
-                .abs()
-                < 1e-9,
-            "Invalid qubit amplitudes"
-        );
+        // The amplitudes of the qubit's initial and possible magnitude must equal 1,
+        // or the qubit has an invalid position.
+        assert!(position.has_valid_amplitude(), "Invalid qubit positions");
 
         Qubit {
             positions: vec![position],
@@ -51,7 +48,7 @@ impl Qubit {
     /// [`Qubit::half_turn`] will return a new [`Qubit`] with it's position set to [`QuantumPosition::HALF_TURN`].
     ///
     /// [`Qubit::half_turn`] can be represented by the following matrix:
-    /// $$ Ht = \begin{pmatrix} 0 \\\ i \end{pmatrix} $$
+    /// $$ Ht = \begin{pmatrix} i \\\ 0 \end{pmatrix} $$
     pub fn half_turn() -> Self {
         Qubit::new(QuantumPosition::HALF_TURN)
     }
@@ -87,7 +84,8 @@ impl Qubit {
     }
 
     /// [`Qubit::measure`] will measure a [`Qubit`] position in complex vector space,
-    /// determined by it's `initial_position`.
+    /// determined by [`Qubit::initial_position`], and return a [`bool`] for it's
+    /// "truthy" state.
     pub fn measure(&self) -> bool {
         let prob_zero = self.initial_position().norm_sqr();
         let mut rng = rand::rng();
@@ -96,13 +94,13 @@ impl Qubit {
 
     /// [`Qubit::initial_position`] will retrieve the current initial position
     /// of the [`Qubit`] that calls it.
-    fn initial_position(&self) -> Complex<f64> {
+    pub fn initial_position(&self) -> Complex<f64> {
         self.position().initial_position
     }
 
     /// [`Qubit::possible_position`] will retrieve the current possible position
     /// of the [`Qubit`] that calls it.
-    fn possible_position(&self) -> Complex<f64> {
+    pub fn possible_position(&self) -> Complex<f64> {
         self.position().possible_position
     }
 
@@ -149,5 +147,141 @@ impl fmt::Display for Qubit {
             self.initial_position(),
             self.possible_position()
         )
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::{
+        constants::ket::{KET_BACK_ROTATION, KET_ONE, KET_ZERO},
+        types::{quantum_gate::QuantumGate, quantum_position::QuantumPosition, qubit::Qubit},
+    };
+
+    #[test]
+    fn new_shouldmakequbit_withvalidposition() {
+        let expected_initial_position = KET_ONE;
+        let expected_possible_position = KET_ZERO;
+
+        let result = Qubit::new(QuantumPosition::new(
+            expected_initial_position,
+            expected_possible_position,
+        ));
+
+        assert_eq!(expected_initial_position, result.initial_position());
+        assert_eq!(expected_possible_position, result.possible_position());
+    }
+
+    #[test]
+    #[should_panic]
+    fn initialposition_shouldpanic_withoutanypositions() {
+        let qubit = Qubit { positions: vec![] };
+
+        qubit.initial_position();
+    }
+
+    #[test]
+    fn initialposition_shouldreturnposition_withvalidqubit() {
+        let expected = KET_ZERO;
+        let qubit = Qubit::new(QuantumPosition::new(expected, KET_ONE));
+
+        let result = qubit.initial_position();
+
+        assert_eq!(expected, result);
+    }
+
+    #[test]
+    #[should_panic]
+    fn possibleposition_shouldpanic_withoutanypositions() {
+        let qubit = Qubit { positions: vec![] };
+
+        qubit.possible_position();
+    }
+
+    #[test]
+    fn possibleposition_shouldreturnposition_withvalidqubit() {
+        let expected = KET_ZERO;
+        let qubit = Qubit::new(QuantumPosition::new(KET_ONE, expected));
+
+        let result = qubit.possible_position();
+
+        assert_eq!(expected, result);
+    }
+
+    #[test]
+    #[should_panic]
+    fn measure_shouldpanic_withoutanypositions() {
+        let qubit = Qubit { positions: vec![] };
+
+        qubit.measure();
+    }
+
+    #[test]
+    #[should_panic]
+    fn applygate_shouldpanic_withoutanypositions() {
+        let qubit = Qubit { positions: vec![] };
+
+        qubit.apply_gate(&QuantumGate::NOT);
+    }
+
+    #[test]
+    fn applygate_shouldflipqubit_withnotgate() {
+        let qubit = Qubit::zero();
+
+        let result = qubit.apply_gate(&QuantumGate::NOT);
+
+        assert_eq!(Qubit::one(), result);
+    }
+
+    #[test]
+    fn applygate_shouldphaseonequbit_withphasegate() {
+        let qubit = Qubit::one();
+
+        let result = qubit.apply_gate(&QuantumGate::PHASE);
+
+        assert_eq!(Qubit::flip(), result);
+    }
+
+    #[test]
+    fn applygate_shouldnotphasezeroqubit_withphasegate() {
+        let qubit = Qubit::zero();
+
+        let result = qubit.apply_gate(&QuantumGate::PHASE);
+
+        assert_eq!(Qubit::zero(), result);
+    }
+
+    #[test]
+    fn applygate_shouldrotateonequbit_withrotategate() {
+        // -i|0> + 0|1>
+        // ┏    ┓
+        // ┃ -i ┃
+        // ┃  0 ┃
+        // ┗    ┛
+        let flipped_position = QuantumPosition::new(KET_BACK_ROTATION, KET_ZERO);
+        let expected = Qubit::new(flipped_position);
+        //  one
+        // ┏   ┓
+        // ┃ 0 ┃
+        // ┃ 1 ┃
+        // ┗   ┛
+        let qubit = Qubit::one();
+
+        //  rotate   one  =     apply_gate     = -i|0> + 0|1>
+        // ┏      ┓ ┏   ┓   ┏                ┓   ┏    ┓
+        // ┃ 0 -i ┃ ┃ 0 ┃ = ┃ (0*0) + (-i*1) ┃ = ┃ -i ┃
+        // ┃ i  0 ┃ ┃ 1 ┃   ┃ (i*0) +  (0*1) ┃   ┃  0 ┃
+        // ┗      ┛ ┗   ┛   ┗                ┛   ┗    ┛
+        let result = qubit.apply_gate(&QuantumGate::ROTATE);
+
+        assert_eq!(expected, result);
+    }
+
+    #[test]
+    fn notoperator_shouldflipqubit() {
+        let qubit = Qubit::zero();
+
+        let result = !qubit;
+
+        assert_eq!(Qubit::one(), result);
     }
 }

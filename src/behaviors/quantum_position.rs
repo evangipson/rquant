@@ -19,8 +19,8 @@ impl QuantumPosition {
     pub const FLIP: QuantumPosition = QuantumPosition::new(KET_ZERO, KET_FLIP);
 
     /// The [`HALF_TURN`](QuantumPosition::HALF_TURN) [`QuantumPosition`] can be represented by the following matrix:
-    /// $$ Ht = \begin{pmatrix} 0 \\\ i \end{pmatrix} $$
-    pub const HALF_TURN: QuantumPosition = QuantumPosition::new(KET_ZERO, KET_ROTATION);
+    /// $$ Ht = \begin{pmatrix} i \\\ 0 \end{pmatrix} $$
+    pub const HALF_TURN: QuantumPosition = QuantumPosition::new(KET_ROTATION, KET_ZERO);
 
     /// The [`BACK_HALF_TURN`](QuantumPosition::BACK_HALF_TURN) [`QuantumPosition`] can be represented by the following matrix:
     /// $$ B(Ht) = \begin{pmatrix} 0 \\\ -i \end{pmatrix} $$
@@ -33,5 +33,14 @@ impl QuantumPosition {
             initial_position,
             possible_position,
         }
+    }
+
+    /// [`QuantumPosition::has_valid_amplitude`] will ensure that amplitudes meet the crucial rule of superposition:
+    /// the sum of the squares of the initial and possible amplitudes must equal one.
+    ///
+    /// The algorithm can be illustrated in the following statement:
+    /// $$ |\alpha|^2 + |\beta|^2 = 1 $$
+    pub fn has_valid_amplitude(&self) -> bool {
+        self.initial_position.norm_sqr() + self.possible_position.norm_sqr() == 1.0
     }
 }
