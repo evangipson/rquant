@@ -6,6 +6,10 @@
 /// [`types`] is a collection of `struct` and `enum` that is used to hold data for
 /// [`behaviors`].
 pub mod types {
+    /// [`logger`] contains all the [`types`](crate::types) for logging a
+    /// [`Qubit`](crate::types::qubit::Qubit).
+    pub mod logger;
+
     /// [`quantum_gate`] contains all the [`types`](crate::types) for quantum logic
     /// gates.
     pub mod quantum_gate;
@@ -29,6 +33,10 @@ pub mod constants {
     /// [`ket`] is a collection of `const` [`Qubit`](crate::types::qubit::Qubit) states
     /// expressed in ["Bra-Ket" form](https://en.wikipedia.org/wiki/Bra-ket_notation).
     pub mod ket;
+}
+
+pub mod macros {
+    pub mod log;
 }
 
 /// [`behaviors`] is a collection of implementations for each [`type`](crate::types).

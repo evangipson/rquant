@@ -141,11 +141,20 @@ impl ops::Not for Qubit {
 /// Implement the [`fmt::Display`] trait for [`Qubit`].
 impl fmt::Display for Qubit {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(
-            f,
-            "\n┏      ┓\n┃ {} ┃\n┃ {} ┃\n┗      ┛",
-            self.initial_position(),
-            self.possible_position()
-        )
+        let initial_includes_imaginary = self.initial_position().im != 0.0;
+        let alpha = if initial_includes_imaginary {
+            self.initial_position().to_string()
+        } else {
+            self.initial_position().re.to_string()
+        };
+
+        let possible_includes_imaginary = self.possible_position().im != 0.0;
+        let beta = if possible_includes_imaginary {
+            self.possible_position().to_string()
+        } else {
+            self.possible_position().re.to_string()
+        };
+
+        write!(f, "{}|{}〉", alpha, beta)
     }
 }

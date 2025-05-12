@@ -100,21 +100,21 @@ mod tests {
 
     #[test]
     fn applygate_shouldrotateonequbit_withrotategate() {
-        // -i|0> + 0|1>
+        //  -i|0>
         // ┏    ┓
         // ┃ -i ┃
         // ┃  0 ┃
         // ┗    ┛
         let flipped_position = QuantumPosition::new(KET_BACK_ROTATION, KET_ZERO);
         let expected = Qubit::new(flipped_position);
-        //  one
+        //  |1>
         // ┏   ┓
         // ┃ 0 ┃
         // ┃ 1 ┃
         // ┗   ┛
         let qubit = Qubit::one();
 
-        //  rotate   one  =     apply_gate     = -i|0> + 0|1>
+        //  rotate   |1>  =     apply_gate     =  -i|0>
         // ┏      ┓ ┏   ┓   ┏                ┓   ┏    ┓
         // ┃ 0 -i ┃ ┃ 0 ┃ = ┃ (0*0) + (-i*1) ┃ = ┃ -i ┃
         // ┃ i  0 ┃ ┃ 1 ┃   ┃ (i*0) +  (0*1) ┃   ┃  0 ┃
