@@ -3,7 +3,7 @@ use std::{fmt, ops};
 use num_complex::Complex;
 use rand::Rng;
 
-use crate::types::{
+use crate::quantum::types::{
     quantum_gate::QuantumGate, quantum_operators::QuantumOperator,
     quantum_position::QuantumPosition, qubit::Qubit,
 };
@@ -127,7 +127,7 @@ impl ops::Not for Qubit {
     /// The [`NOT`](QuantumGate::NOT) [`QuantumGate`] can be expressed on a
     /// [`Qubit`] using the `!` symbol:
     /// ```rust
-    /// use rquant::types::qubit::Qubit;
+    /// use rquant::quantum::types::qubit::Qubit;
     ///
     /// fn flip_qubit(qubit: Qubit) -> Qubit {
     ///     !qubit

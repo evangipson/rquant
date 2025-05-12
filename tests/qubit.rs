@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod tests {
-    use rquant::{
+    use rquant::quantum::{
         constants::ket::{KET_BACK_ROTATION, KET_ONE, KET_ZERO},
         types::{quantum_gate::QuantumGate, quantum_position::QuantumPosition, qubit::Qubit},
     };

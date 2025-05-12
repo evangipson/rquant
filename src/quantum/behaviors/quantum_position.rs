@@ -1,6 +1,6 @@
 use num_complex::Complex;
 
-use crate::{
+use crate::quantum::{
     constants::ket::{KET_BACK_ROTATION, KET_FLIP, KET_ONE, KET_ROTATION, KET_ZERO},
     types::quantum_position::QuantumPosition,
 };

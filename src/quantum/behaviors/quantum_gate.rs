@@ -2,7 +2,7 @@ use std::fmt;
 
 use num_complex::Complex;
 
-use crate::types::{
+use crate::quantum::types::{
     quantum_gate::QuantumGate, quantum_operators::QuantumOperator,
     quantum_position::QuantumPosition,
 };
@@ -21,8 +21,8 @@ impl QuantumGate {
     /// \begin{pmatrix} \alpha \\\ \beta \end{pmatrix} =
     /// \begin{pmatrix} \beta \\\ \alpha \end{pmatrix} $$
     /// ```rust
-    /// use rquant::types::quantum_gate::QuantumGate;
-    /// use rquant::types::qubit::Qubit;
+    /// use rquant::quantum::types::quantum_gate::QuantumGate;
+    /// use rquant::quantum::types::qubit::Qubit;
     ///
     /// fn flip_qubit(qubit: &Qubit) -> Qubit {
     ///     qubit.apply_gate(&QuantumGate::NOT)
@@ -31,7 +31,7 @@ impl QuantumGate {
     ///
     /// The [`NOT`](QuantumGate::NOT) gate can also be expressed with the `!` symbol:
     /// ```rust
-    /// use rquant::types::qubit::Qubit;
+    /// use rquant::quantum::types::qubit::Qubit;
     ///
     /// fn flip_qubit(qubit: Qubit) -> Qubit {
     ///     !qubit
@@ -39,7 +39,7 @@ impl QuantumGate {
     /// ```
     pub const NOT: QuantumGate = QuantumGate::new(QuantumOperator::NOT);
 
-    /// The [`ROTATE`](QuantumGate::ROTATE) gate rotates a [`Qubit`](crate::types::qubit::Qubit)
+    /// The [`ROTATE`](QuantumGate::ROTATE) gate rotates a [`Qubit`](crate::quantum::types::qubit::Qubit)
     /// 180 degrees around it's Y-axis.
     ///
     /// The gate can be represented by the following matrix:
@@ -53,8 +53,8 @@ impl QuantumGate {
     /// \begin{pmatrix} -i \beta \\\ i \alpha \end{pmatrix} =
     /// -\beta|0\rangle + \alpha|1\rangle $$
     /// ```rust
-    /// use rquant::types::quantum_gate::QuantumGate;
-    /// use rquant::types::qubit::Qubit;
+    /// use rquant::quantum::types::quantum_gate::QuantumGate;
+    /// use rquant::quantum::types::qubit::Qubit;
     ///
     /// fn rotate_qubit(qubit: &Qubit) -> Qubit {
     ///     qubit.apply_gate(&QuantumGate::ROTATE)
@@ -62,7 +62,7 @@ impl QuantumGate {
     /// ```
     pub const ROTATE: QuantumGate = QuantumGate::new(QuantumOperator::ROTATE);
 
-    /// The [`PHASE`](QuantumGate::PHASE) gate leaves the state of a [`Qubit`](crate::types::qubit::Qubit)
+    /// The [`PHASE`](QuantumGate::PHASE) gate leaves the state of a [`Qubit`](crate::quantum::types::qubit::Qubit)
     /// unchanged, and flips the phase of the $|1\rangle$ state by $\pi$.
     ///
     /// The gate can be represented by the following matrix:
@@ -76,8 +76,8 @@ impl QuantumGate {
     /// \begin{pmatrix} \alpha \\\ -\beta \end{pmatrix} =
     /// \alpha|0\rangle - \beta|1\rangle $$
     /// ```rust
-    /// use rquant::types::quantum_gate::QuantumGate;
-    /// use rquant::types::qubit::Qubit;
+    /// use rquant::quantum::types::quantum_gate::QuantumGate;
+    /// use rquant::quantum::types::qubit::Qubit;
     ///
     /// fn phase_qubit(qubit: &Qubit) -> Qubit {
     ///     qubit.apply_gate(&QuantumGate::PHASE)
@@ -85,7 +85,7 @@ impl QuantumGate {
     /// ```
     pub const PHASE: QuantumGate = QuantumGate::new(QuantumOperator::PHASE);
 
-    /// [`QuantumGate::new`] will create a [`QuantumGate`] to transform a [`Qubit`](crate::types::qubit::Qubit)
+    /// [`QuantumGate::new`] will create a [`QuantumGate`] to transform a [`Qubit`](crate::quantum::types::qubit::Qubit)
     /// in complex vector space based on the provided [`QuantumOperator`].
     pub const fn new(operator: QuantumOperator) -> Self {
         let transform = match operator {

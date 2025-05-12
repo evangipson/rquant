@@ -1,6 +1,6 @@
 use rquant::{
     log_info,
-    types::{quantum_gate::QuantumGate, qubit::Qubit},
+    quantum::types::{quantum_gate::QuantumGate, qubit::Qubit},
 };
 
 fn get_qubit_variations(name: &str, qubit: Qubit) -> String {

@@ -21,8 +21,8 @@ The list of currently supported gates is as follows:
 ## Examples
 You can do basic operations on a qubit like so:
 ```rust
-use rquant::types::qubit::Qubit;
-use rquant::types::quantum_gate::QuantumGate;
+use rquant::quantum::types::qubit::Qubit;
+use rquant::quantum::types::quantum_gate::QuantumGate;
 
 fn main() {
     let zero_qubit = Qubit::zero();

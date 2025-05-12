@@ -1,4 +1,4 @@
-use crate::types::quantum_position::QuantumPosition;
+use crate::quantum::types::quantum_position::QuantumPosition;
 
 /// [`Qubit`] is an informational bit that can be both 0 and 1
 /// simultaneously due to superposition.
