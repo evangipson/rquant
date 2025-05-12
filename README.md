@@ -14,30 +14,37 @@ The list of currently supported gates is as follows:
 ## Getting Started
 1. Download the repo
 1. Open a terminal and navigate to the repo root
-1. Run `cargo run` to see the output of the (very simple) [`main`](./src/main.rs) function
-1. Run `cargo test --doc` to run all the docs tests
-1. Run `cargo doc` to generate the docs
+1. Run `cargo run` to see the output of the (very simple) [`main`](src/main.rs) function
+1. Run `cargo test` to run all the docs tests
+1. Run `cargo doc --no-deps` to generate the docs
 
 ## Examples
-You can do basic operations on a qubit like so:
+You can do basic operations on qubits using the following example:
 ```rust
-use rquant::quantum::types::qubit::Qubit;
-use rquant::quantum::types::quantum_gate::QuantumGate;
+use rquant::{
+    log_info,
+    quantum::types::{qubit::Qubit,quantum_gate::QuantumGate}
+};
 
 fn main() {
-    let zero_qubit = Qubit::zero();
-    println!("Zero Qubit:{}", zero_qubit);
-
-    let not_zero_qubit = !zero_qubit;
-    println!("Zero Qubit with NOT gate applied:{}", zero_qubit);
-
-    let one_qubit = Qubit::one();
-    println!("One Qubit:{}", zero_qubit);
-
-    let flipped_one_qubit = one_qubit.apply_gate(&QuantumGate::FLIP);
-    println!("One Qubit with FLIP gate applied:{}", flipped_one_qubit);
+    log_info!(
+        "Zero qubit: {}\nNOT: {}\nROTATE: {}",
+        Qubit::zero(),
+        !Qubit::zero(),
+        Qubit::zero().apply_gate(&QuantumGate::ROTATE)
+    );
+    log_info!(
+        "Identity qubit: {}\nNOT: {}\nROTATE: {}",
+        Qubit::one(),
+        !Qubit::one(),
+        Qubit::one().apply_gate(&QuantumGate::ROTATE)
+    );
 }
 ```
+
+Running the previous example will produce the following output:
+
+![Screenshot of console output for the code example on the README page for rquant.](assets/output.png)
 
 ## Dependencies
 |Crate|Purpose|
