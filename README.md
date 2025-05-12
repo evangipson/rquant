@@ -15,7 +15,7 @@ The list of currently supported gates is as follows:
 1. Download the repo
 1. Open a terminal and navigate to the repo root
 1. Run `cargo run` to see the output of the (very simple) [`main`](src/main.rs) function
-1. Run `cargo test` to run all the docs tests
+1. Run `cargo test` to run all the tests
 1. Run `cargo doc --no-deps` to generate the docs
 
 ## Examples
