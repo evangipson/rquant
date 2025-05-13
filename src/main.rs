@@ -1,51 +1,21 @@
 use rquant::{
-    log_info,
-    quantum::types::{quantum_gate::QuantumGate, qubit::Qubit},
+    quantum::types::qubit::Qubit,
+    simulation::types::{simulation::Simulation, simulation_report::SimulationReport},
 };
 
-fn get_qubit_variations(name: &str, qubit: Qubit) -> String {
-    let flipped_qubit = !qubit.clone();
-    let phased_qubit = qubit.apply_gate(&QuantumGate::PHASE);
-    let rotated_qubit = qubit.apply_gate(&QuantumGate::ROTATE);
-    format!("{name}\t{qubit}\t{flipped_qubit}\t{phased_qubit}\t{rotated_qubit}")
-}
-
-fn get_qubit_evaluations(name: &str, qubit: Qubit) -> String {
-    let qubit_eval = qubit.measure();
-    let flipped_qubit_eval = !qubit.clone().measure();
-    let phased_qubit_eval = qubit.apply_gate(&QuantumGate::PHASE).measure();
-    let rotated_qubit_eval = qubit.apply_gate(&QuantumGate::ROTATE).measure();
-    format!("{name}\t{qubit_eval}\t{flipped_qubit_eval}\t{phased_qubit_eval}\t{rotated_qubit_eval}")
-}
-
 fn main() {
-    log_info!(
-        "\n{:^39}\n\nName\tQubit\tNOT\tPHASE\tROTATE\n{:-<39}\n{}\n{}",
-        "Qubit Notations",
-        "",
-        get_qubit_variations("Zero", Qubit::zero()),
-        get_qubit_variations("One", Qubit::one()),
-    );
+    let qubit_simulations = 10000;
 
-    log_info!(
-        "\n{:^39}\n\nName\tQubit\tNOT\tPHASE\tROTATE\n{:-<39}\n{}\n{}\n",
-        "Qubit Evaluations",
-        "",
-        get_qubit_evaluations("Zero", Qubit::zero()),
-        get_qubit_evaluations("One", Qubit::one()),
-    );
-
-    let superpositioned_identity_qubit = Qubit::one().apply_gate(&QuantumGate::SUPERPOSITION);
-    log_info!(
-        "Identity qubit with SUPERPOSITION gate applied:\n{}\nMeasured: {}\n",
-        superpositioned_identity_qubit,
-        superpositioned_identity_qubit.measure()
-    );
-
-    let superpositioned_zero_qubit = Qubit::zero().apply_gate(&QuantumGate::SUPERPOSITION);
-    log_info!(
-        "Zero qubit with SUPERPOSITION gate applied:\n{}\nMeasured: {}\n",
-        superpositioned_zero_qubit,
-        superpositioned_zero_qubit.measure()
-    );
+    Qubit::one()
+        .simulate_superposition(qubit_simulations)
+        .report(Qubit::one());
+    Qubit::zero()
+        .simulate_superposition(qubit_simulations)
+        .report(Qubit::zero());
+    Qubit::quarter_turn()
+        .simulate_superposition(qubit_simulations)
+        .report(Qubit::quarter_turn());
+    Qubit::flip()
+        .simulate_superposition(qubit_simulations)
+        .report(Qubit::flip());
 }

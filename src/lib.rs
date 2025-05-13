@@ -58,16 +58,17 @@ pub mod logger {
     /// [`types`] is a collection of `struct` and `enum` that is used to hold data for
     /// [`logger`](crate::logger) [`behaviors`].
     pub mod types {
-        /// [`log_color`](`crate::logger::types::log_color::LogColor`) contains all the [`types`](crate::logger::types)
-        /// for log colors.
+        /// [`log_color`](`crate::logger::types::log_color::LogColor`) contains all the
+        /// [`types`](crate::logger::types) for log colors.
         pub mod log_color;
-        /// [`log_info`](`crate::logger::types::log_info::LogInfo`) contains all the [`types`](crate::logger::types)
-        /// for log information.
+        /// [`log_info`](`crate::logger::types::log_info::LogInfo`) contains all the
+        /// [`types`](crate::logger::types) for log information.
         pub mod log_info;
         /// [`log_severity`](crate::logger::types::log_severity::LogSeverity) contains all the
         /// [`types`](crate::logger::types) for log severity levels.
         pub mod log_severity;
-        /// [`logger`](crate::logger::types::logger::Logger) contains all the [`types`](crate::logger::types) for logging.
+        /// [`logger`](crate::logger::types::logger::Logger) contains all the
+        /// [`types`](crate::logger::types) for logging.
         pub mod logger;
     }
 
@@ -91,5 +92,30 @@ pub mod logger {
     pub mod macros {
         /// [`log`] contains all the `macro_rules` for [`logger`](crate::logger).
         pub mod log;
+    }
+}
+
+/// [`simulation`] is a collection of [`types`](crate::simulation::types) and
+/// [`behaviors`](crate::simulation::behaviors) for running simulations and reporting their results.
+pub mod simulation {
+    /// [`types`] is a collection of `struct` and `enum` that is used to hold data for
+    /// [`simulation`](crate::simulation) [`behaviors`].
+    pub mod types {
+        /// [`simulation`](`crate::simulation::types::simulation::Simulation<T>`) contains all the
+        /// [`types`](crate::simulation::types) for running simulations.
+        pub mod simulation;
+        /// [`simulation_report`](`crate::simulation::types::simulation_report::SimulationReport<T>`)
+        /// contains all the [`types`](crate::simulation::types) for reporting simulation results.
+        pub mod simulation_report;
+    }
+
+    /// [`behaviors`] is a collection of implementations for each [`type`](crate::simulation::types).
+    pub mod behaviors {
+        /// [`simulation`](`crate::simulation::types::simulation::Simulation<T>`) contains all the
+        /// [`behaviors`](crate::simulation::behaviors) for running simulations.
+        pub mod simulation;
+        /// [`simulation_report`](`crate::simulation::types::simulation_report::SimulationReport<T>`)
+        /// contains all the [`behaviors`](crate::simulation::behaviors) for reporting simulation results.
+        pub mod simulation_report;
     }
 }

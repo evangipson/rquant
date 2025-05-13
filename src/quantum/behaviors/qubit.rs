@@ -1,12 +1,10 @@
-use std::{fmt, ops};
-
-use num_complex::Complex;
-use rand::Rng;
-
 use crate::quantum::types::{
     quantum_gate::QuantumGate, quantum_operators::QuantumOperator,
     quantum_position::QuantumPosition, qubit::Qubit,
 };
+use num_complex::Complex;
+use rand::Rng;
+use std::{fmt, ops};
 
 impl Qubit {
     /// [`Qubit::new`] will create a new [`Qubit`] with a [`QuantumPosition`]
