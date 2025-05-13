@@ -1,5 +1,5 @@
 use rquant::{
-    quantum::types::qubit::Qubit,
+    quantum::types::{qubit::Qubit, qubit_register::QubitRegister},
     simulation::types::{simulation::Simulation, simulation_report::SimulationReport},
 };
 
@@ -18,4 +18,8 @@ fn main() {
     Qubit::flip()
         .simulate_superposition(qubit_simulations)
         .report(Qubit::flip());
+
+    QubitRegister::new(5)
+        .simulate_superposition(qubit_simulations)
+        .report(QubitRegister::new(5));
 }

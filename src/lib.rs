@@ -22,6 +22,10 @@ pub mod quantum {
         /// position in complex vector space.
         pub mod quantum_position;
 
+        /// [`qubit_register`](crate::quantum::types::qubit_register::QubitRegister) contains all the
+        /// [`types`](crate::quantum::types) for interacting with multiple qubits.
+        pub mod qubit_register;
+
         /// [`qubit`](crate::quantum::types::qubit::Qubit) contains all the [`types`](crate::quantum::types)
         /// for anything related to qubits.
         pub mod qubit;
@@ -45,6 +49,10 @@ pub mod quantum {
         /// [`behaviors`](crate::quantum::behaviors) for expressing qubit position in complex
         /// vector space.
         pub mod quantum_position;
+
+        /// [`qubit_register`](crate::quantum::types::qubit_register::QubitRegister) contains all the
+        /// [`behaviors`](crate::quantum::behaviors) for interacting with multiple qubits.
+        pub mod qubit_register;
 
         /// [`qubit`](crate::quantum::types::qubit::Qubit) contains all the
         /// [`behaviors`](crate::quantum::behaviors) for anything related to qubits.
