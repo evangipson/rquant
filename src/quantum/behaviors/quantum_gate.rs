@@ -85,6 +85,29 @@ impl QuantumGate {
     /// ```
     pub const PHASE: QuantumGate = QuantumGate::new(QuantumOperator::PHASE);
 
+    /// The [`SUPERPOSITION`](QuantumGate::SUPERPOSITION) turns the amplitude of the $|0\rangle$ and $|1\rangle$
+    /// states of a [`Qubit`](crate::quantum::types::qubit::Qubit) into an equal superposition of $|0\rangle$
+    /// and $|1\rangle$.
+    ///
+    /// Also referred to as a "Hadamard gate".
+    ///
+    /// The SUPERPOSITION [`QuantumOperator`] can be represented by the following matrix:
+    /// $$S=\frac{1}{\sqrt{2}}\begin{pmatrix} 1 & 1 \\\ 1 & -1 \end{pmatrix}$$
+    ///
+    /// The [`SUPERPOSITION`](QuantumGate::SUPERPOSITION) gate can modify the amplitude of a
+    /// [`Qubit`](crate::quantum::types::qubit::Qubit) such that:
+    ///
+    /// $$H|0\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$$
+    /// $$H|1\rangle = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)$$
+    /// ```rust
+    /// use rquant::quantum::types::{quantum_gate::QuantumGate, qubit::Qubit};
+    ///
+    /// fn superposition_qubit(qubit: &Qubit) -> Qubit {
+    ///     qubit.apply_gate(&QuantumGate::SUPERPOSITION)
+    /// }
+    /// ```
+    pub const SUPERPOSITION: QuantumGate = QuantumGate::new(QuantumOperator::SUPERPOSITION);
+
     /// [`QuantumGate::new`] will create a [`QuantumGate`] to transform a [`Qubit`](crate::quantum::types::qubit::Qubit)
     /// in complex vector space based on the provided [`QuantumOperator`].
     ///
@@ -101,17 +124,16 @@ impl QuantumGate {
     pub const fn new(operator: QuantumOperator) -> Self {
         let transform = match operator {
             QuantumOperator::NOT => [QuantumPosition::ONE, QuantumPosition::ZERO],
-            QuantumOperator::ROTATE => {
-                [QuantumPosition::BACK_HALF_TURN, QuantumPosition::HALF_TURN]
-            }
+            QuantumOperator::ROTATE => [
+                QuantumPosition::BACK_QUARTER_TURN,
+                QuantumPosition::QUARTER_TURN,
+            ],
             QuantumOperator::PHASE => [QuantumPosition::ZERO, QuantumPosition::FLIP],
             QuantumOperator::SUPERPOSITION => {
                 let factor = 1.0 / std::f64::consts::SQRT_2;
-                let superposition = Complex::new(factor, 0.0);
-                let superposition_flip = Complex::new(-factor, 0.0);
                 [
-                    QuantumPosition::new(superposition, superposition),
-                    QuantumPosition::new(superposition, superposition_flip),
+                    QuantumPosition::new(Complex::new(factor, 0.0), Complex::new(factor, 0.0)),
+                    QuantumPosition::new(Complex::new(factor, 0.0), Complex::new(-factor, 0.0)),
                 ]
             }
         };

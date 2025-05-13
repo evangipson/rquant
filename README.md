@@ -1,15 +1,9 @@
 # rquant
+![rustc (with version)](https://img.shields.io/badge/rustc-1.56.0+-blue?style=for-the-badge&logo=rust) ![crate.rs (with version)](https://img.shields.io/crates/v/rquant?style=for-the-badge&logo=hackthebox&logoColor=white) ![docs.rs (with version)](https://img.shields.io/docsrs/rquant/latest?style=for-the-badge&logo=rust)
+
 A quantum computing library written entirely in rust.
 
 It allows for qubit measurement and basic quantum logic in complex vector space. Gates can be applied to qubits in complex vector space, then those qubits can be measured to observe the outcome.
-
-The list of currently supported gates is as follows:
-
-|Gate|Transform|Outcome|
-|-|:-:|:-:|
-|**NOT**|$`\begin{pmatrix} 0 & 1 \\\ 1 & 0 \end{pmatrix}`$|$`\begin{pmatrix} 0 & 1 \\\ 1 & 0 \end{pmatrix}\begin{pmatrix} \alpha \\\ \beta \end{pmatrix} = \begin{pmatrix} \beta \\\ \alpha \end{pmatrix}`$|
-|**ROTATE**|$`\begin{pmatrix} 0 & -i \\\ i & 0 \end{pmatrix}`$|$`\begin{pmatrix} 0 & -i \\\ i & 0 \end{pmatrix} \begin{pmatrix} \alpha \\\ \beta \end{pmatrix} = \begin{pmatrix} -i \beta \\\ i \alpha \end{pmatrix}`$|
-|**PHASE**|$`\begin{pmatrix} 1 & 0 \\\ 0 & -1 \end{pmatrix}`$|$`\begin{pmatrix} 1 & 0 \\\ 0 & -1 \end{pmatrix} \begin{pmatrix} \alpha \\\ \beta \end{pmatrix} = \begin{pmatrix} \alpha \\\ -\beta \end{pmatrix}`$|
 
 ## Getting Started
 1. Download the repo
@@ -33,11 +27,19 @@ fn main() {
         !Qubit::zero(),
         Qubit::zero().apply_gate(&QuantumGate::ROTATE)
     );
+
     log_info!(
         "Identity qubit: {}\nNOT: {}\nROTATE: {}",
         Qubit::one(),
         !Qubit::one(),
         Qubit::one().apply_gate(&QuantumGate::ROTATE)
+    );
+
+    let superpositioned_identity_qubit = Qubit::one().apply_gate(&QuantumGate::SUPERPOSITION);
+    log_info!(
+        "Identity qubit with SUPERPOSITION gate applied:\n{}\nMeasured: {}\n",
+        superpositioned_identity_qubit,
+        superpositioned_identity_qubit.measure()
     );
 }
 ```

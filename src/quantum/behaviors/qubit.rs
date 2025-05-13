@@ -86,41 +86,42 @@ impl Qubit {
         Qubit::new(QuantumPosition::FLIP)
     }
 
-    /// [`Qubit::half_turn`] will return a new [`Qubit`] with it's position set to [`QuantumPosition::HALF_TURN`].
+    /// [`Qubit::quarter_turn`] will return a new [`Qubit`] with it's position set to
+    /// [`QuantumPosition::QUARTER_TURN`].
     ///
-    /// [`Qubit::half_turn`] can be represented by the following matrix:
-    /// $$ Ht = \begin{pmatrix} i \\\ 0 \end{pmatrix} $$
+    /// [`Qubit::quarter_turn`] can be represented by the following matrix:
+    /// $$ Qt = \begin{pmatrix} i \\\ 0 \end{pmatrix} $$
     ///
     /// # Example
-    /// [`Qubit::half_turn`] can be used to get a half-turned [`Qubit`]:
+    /// [`Qubit::quarter_turn`] can be used to get a quarter-turned [`Qubit`]:
     /// ```rust
     /// use rquant::quantum::types::{qubit::Qubit, quantum_position::QuantumPosition};
     ///
-    /// fn get_half_turned_qubit() -> Qubit {
-    ///     Qubit::half_turn()
+    /// fn get_quarter_turned_qubit() -> Qubit {
+    ///     Qubit::quarter_turn()
     /// }
     /// ```
-    pub fn half_turn() -> Self {
-        Qubit::new(QuantumPosition::HALF_TURN)
+    pub fn quarter_turn() -> Self {
+        Qubit::new(QuantumPosition::QUARTER_TURN)
     }
 
-    /// [`Qubit::back_half_turn`] will return a new [`Qubit`] with it's position set to
-    /// [`QuantumPosition::BACK_HALF_TURN`].
+    /// [`Qubit::back_quarter_turn`] will return a new [`Qubit`] with it's position set to
+    /// [`QuantumPosition::BACK_QUARTER_TURN`].
     ///
-    /// [`Qubit::back_half_turn`] can be represented by the following matrix:
-    /// $$ B(Ht) = \begin{pmatrix} 0 \\\ -i \end{pmatrix} $$
+    /// [`Qubit::back_quarter_turn`] can be represented by the following matrix:
+    /// $$ B(Qt) = \begin{pmatrix} 0 \\\ -i \end{pmatrix} $$
     ///
     /// # Example
-    /// [`Qubit::back_half_turn`] can be used to get a backwards half-turned [`Qubit`]:
+    /// [`Qubit::back_quarter_turn`] can be used to get a backwards quarter-turned [`Qubit`]:
     /// ```rust
     /// use rquant::quantum::types::{qubit::Qubit, quantum_position::QuantumPosition};
     ///
-    /// fn get_backwards_half_turned_qubit() -> Qubit {
-    ///     Qubit::back_half_turn()
+    /// fn get_backwards_quarter_turned_qubit() -> Qubit {
+    ///     Qubit::back_quarter_turn()
     /// }
     /// ```
-    pub fn back_half_turn() -> Self {
-        Qubit::new(QuantumPosition::BACK_HALF_TURN)
+    pub fn back_quarter_turn() -> Self {
+        Qubit::new(QuantumPosition::BACK_QUARTER_TURN)
     }
 
     /// [`Qubit::update`] will move the [`Qubit`] that calls it to a new [`QuantumPosition`] in
@@ -267,7 +268,7 @@ impl fmt::Display for Qubit {
     /// of the [`Qubit`]. For instance, [`Qubit::zero`] will be presented as:
     /// $$ 1|0\rangle $$
     ///
-    /// While a more complex [`Qubit`], such as [`Qubit::back_half_turn`] will be presented as:
+    /// While a more complex [`Qubit`], such as [`Qubit::back_quarter_turn`] will be presented as:
     /// $$ 0|0-1i\rangle $$
     ///
     /// # Example

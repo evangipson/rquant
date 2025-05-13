@@ -34,4 +34,18 @@ fn main() {
         get_qubit_evaluations("Zero", Qubit::zero()),
         get_qubit_evaluations("One", Qubit::one()),
     );
+
+    let superpositioned_identity_qubit = Qubit::one().apply_gate(&QuantumGate::SUPERPOSITION);
+    log_info!(
+        "Identity qubit with SUPERPOSITION gate applied:\n{}\nMeasured: {}\n",
+        superpositioned_identity_qubit,
+        superpositioned_identity_qubit.measure()
+    );
+
+    let superpositioned_zero_qubit = Qubit::zero().apply_gate(&QuantumGate::SUPERPOSITION);
+    log_info!(
+        "Zero qubit with SUPERPOSITION gate applied:\n{}\nMeasured: {}\n",
+        superpositioned_zero_qubit,
+        superpositioned_zero_qubit.measure()
+    );
 }

@@ -18,13 +18,14 @@ impl QuantumPosition {
     /// $$ F = \begin{pmatrix} 0 \\\ -1 \end{pmatrix} $$
     pub const FLIP: QuantumPosition = QuantumPosition::new(KET_ZERO, KET_FLIP);
 
-    /// The [`HALF_TURN`](QuantumPosition::HALF_TURN) [`QuantumPosition`] can be represented by the following matrix:
-    /// $$ Ht = \begin{pmatrix} i \\\ 0 \end{pmatrix} $$
-    pub const HALF_TURN: QuantumPosition = QuantumPosition::new(KET_ROTATION, KET_ZERO);
+    /// The [`QUARTER_TURN`](QuantumPosition::QUARTER_TURN) [`QuantumPosition`] can be represented by the following matrix:
+    /// $$ Qt = \begin{pmatrix} i \\\ 0 \end{pmatrix} $$
+    pub const QUARTER_TURN: QuantumPosition = QuantumPosition::new(KET_ROTATION, KET_ZERO);
 
-    /// The [`BACK_HALF_TURN`](QuantumPosition::BACK_HALF_TURN) [`QuantumPosition`] can be represented by the following matrix:
-    /// $$ B(Ht) = \begin{pmatrix} 0 \\\ -i \end{pmatrix} $$
-    pub const BACK_HALF_TURN: QuantumPosition = QuantumPosition::new(KET_ZERO, KET_BACK_ROTATION);
+    /// The [`BACK_QUARTER_TURN`](QuantumPosition::BACK_QUARTER_TURN) [`QuantumPosition`] can be represented by the following matrix:
+    /// $$ B(Qt) = \begin{pmatrix} 0 \\\ -i \end{pmatrix} $$
+    pub const BACK_QUARTER_TURN: QuantumPosition =
+        QuantumPosition::new(KET_ZERO, KET_BACK_ROTATION);
 
     /// [`new`](QuantumPosition::new) will create a new [`QuantumPosition`] in complex vector space, given two [`Complex<f64>`]
     /// numbers.
@@ -64,6 +65,8 @@ impl QuantumPosition {
     /// }
     /// ```
     pub fn has_valid_amplitude(&self) -> bool {
-        self.initial_position.norm_sqr() + self.possible_position.norm_sqr() == 1.0
+        let sum_of_squares = self.initial_position.norm_sqr() + self.possible_position.norm_sqr();
+        // Allow a small margin of error for floating-point inaccuracy
+        (sum_of_squares - 1.0).abs() < 10.0 * f64::EPSILON
     }
 }
