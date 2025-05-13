@@ -1,6 +1,6 @@
 [package]
 name = "rquant"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2021"
 authors = ["Evan Gipson <evangipson@gmail.com>"]
 exclude = [".gitignore"]
