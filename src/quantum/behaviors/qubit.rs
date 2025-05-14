@@ -134,7 +134,7 @@ impl Qubit {
     ///     qubit.update(new_position);
     /// }
     /// ```
-    pub fn update(mut self, new_position: QuantumPosition) {
+    pub fn update(&mut self, new_position: QuantumPosition) {
         self.positions.push(new_position);
     }
 
