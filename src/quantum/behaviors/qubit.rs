@@ -130,7 +130,7 @@ impl Qubit {
     /// ```rust
     /// use rquant::quantum::types::{qubit::Qubit, quantum_position::QuantumPosition};
     ///
-    /// fn move_qubit(qubit: Qubit, new_position: QuantumPosition) {
+    /// fn move_qubit(mut qubit: Qubit, new_position: QuantumPosition) {
     ///     qubit.update(new_position);
     /// }
     /// ```

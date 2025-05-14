@@ -1,6 +1,6 @@
 /// [`QuantumOperator`] is a collection of quantum logical operators that produce varying
 /// output given one or many [`Qubits`](crate::quantum::types::qubit::Qubit).
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq)]
 pub enum QuantumOperator {
     /// The NOT [`QuantumOperator`] flips the amplitudes of the $|0\rangle$ and
     /// $|1\rangle$ states, analagous to a classic logical NOT.

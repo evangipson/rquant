@@ -51,7 +51,7 @@ impl QubitRegister {
     /// }
     /// ```
     pub fn is_empty(&self) -> bool {
-        self.qubits.len() > 0
+        self.qubits.len() == 0
     }
 
     /// [`QubitRegister::get`] gets a reference to a specific qubit in the register,

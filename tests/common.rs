@@ -6,5 +6,8 @@ pub fn setup() {
 
 #[cfg(test)]
 mod quantum {
+    mod quantum_gate;
+    mod quantum_position;
     mod qubit;
+    mod qubit_register;
 }
