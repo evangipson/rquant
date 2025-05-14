@@ -39,7 +39,7 @@ fn main() {
 
 This example will produce the following output:
 
-![A screenshot of console output from qubit creation using the rquant rust crate](https://raw.githubusercontent.com/evangipson/rquant/blob/main/assets/first-example-output.png?raw=true)
+![A screenshot of console output from qubit creation using the rquant rust crate](https://raw.githubusercontent.com/evangipson/rquant/refs/heads/main/assets/first-example-output.png?raw=true)
 
 ### Applying gates to qubits
 You can apply a gate to a single qubit:
@@ -64,7 +64,7 @@ fn main() {
 
 This example will produce the following output:
 
-![A screenshot of console output from applying a gate to a qubit using the rquant rust crate](https://raw.githubusercontent.com/evangipson/rquant/blob/main/assets/second-example-output.png?raw=true)
+![A screenshot of console output from applying a gate to a qubit using the rquant rust crate](https://raw.githubusercontent.com/evangipson/rquant/refs/heads/main/assets/second-example-output.png?raw=true)
 
 ### Create multiple associated qubits
 You can create a collection of many qubits using a qubit register:
@@ -97,7 +97,7 @@ fn main() {
 
 This example will produce the following output:
 
-![A screenshot of console output from creating a qubit register using the rquant rust crate](https://raw.githubusercontent.com/evangipson/rquant/blob/main/assets/third-example-output.png?raw=true)
+![A screenshot of console output from creating a qubit register using the rquant rust crate](https://raw.githubusercontent.com/evangipson/rquant/refs/heads/main/assets/third-example-output.png?raw=true)
 
 ### Run simulations on qubits
 You can simulate and report on behavior on any amount of qubits:
@@ -118,7 +118,7 @@ fn main() {
 
 This example will produce the following output:
 
-![A screenshot of console output from qubit simulation using the rquant rust crate](https://raw.githubusercontent.com/evangipson/rquant/blob/main/assets/fourth-example-output.png?raw=true)
+![A screenshot of console output from qubit simulation using the rquant rust crate](https://raw.githubusercontent.com/evangipson/rquant/refs/heads/main/assets/fourth-example-output.png?raw=true)
 
 ## Dependencies
 |Crate|Purpose|
